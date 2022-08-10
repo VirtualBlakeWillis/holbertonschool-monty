@@ -1,6 +1,6 @@
 #include "monty.h"
 
-extern unsigned int isFail;
+ unsigned int isFail;
 /**
  * main - monty main function
  *
@@ -88,6 +88,12 @@ int parse_line(char *buff, stack_t **head, unsigned int lnum)
 		token = strtok(NULL, " \t\n");
 		if (strcmp(token,"0") == 0)
 			(*head)->n = 0;
+		if (token == NULL)
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", lnum);
+			isFail = 1;
+			return (EXIT_FAILURE);
+		}
 		else
 		{
 			(*head)->n = atoi(token);
