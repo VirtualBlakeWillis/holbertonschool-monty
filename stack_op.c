@@ -66,7 +66,11 @@ void pint(stack_t **h, unsigned int ln)
 	printf("%d\n", (*h)->n);
 }
 /**
+ * pop - pop head value of stack
  *
+ * @h: head of stack
+ * @ln: line number
+ * Return: void
  */
 void pop(stack_t **h, unsigned int ln)
 {
@@ -81,4 +85,26 @@ void pop(stack_t **h, unsigned int ln)
 	free(temp);
 
 }
+/**
+ * swap - swap 2 most recent nodes on stack
+ *
+ * @h: head of stack
+ * @ln: line number
+ * @Return: void
+ */
+void swap(stack_t **h, unsigned int ln)
+{
+	stack_t *temp = (*h)->next;
+	int x;
 
+	if (*h == NULL || (*h)->next == NULL)
+	{
+		fprintf(stderr, "L%d: can't swap, stack too short\n", ln);
+		isFail = 1;
+		return;
+	}
+	x = (*h)->n;
+	(*h)->n = temp->n;
+	temp->n = x;
+
+}
