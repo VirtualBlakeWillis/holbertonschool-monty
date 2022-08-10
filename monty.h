@@ -52,4 +52,5 @@ void pint (stack_t **h, unsigned int ln);
 
 
 void (*get_op(char *str))(stack_t **stack, unsigned int line_number);
+void free_stack(stack_t *head);
 #endif
