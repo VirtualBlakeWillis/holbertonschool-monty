@@ -65,3 +65,20 @@ void pint(stack_t **h, unsigned int ln)
 	}
 	printf("%d\n", (*h)->n);
 }
+/**
+ *
+ */
+void pop(stack_t **h, unsigned int ln)
+{
+	stack_t *temp = *h;
+	if (*h == NULL)
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", ln);
+		isFail = 1;
+		return;
+	}
+	*h = (*h)->next;
+	free(temp);
+
+}
+

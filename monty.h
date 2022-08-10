@@ -49,7 +49,7 @@ int parse_line(char *line, stack_t **h, unsigned int lnum);
 void push(stack_t **h, unsigned int ln);
 void pall(stack_t **h, unsigned int ln);
 void pint (stack_t **h, unsigned int ln);
-
+void pop(stack_t **h, unsigned int ln);
 
 void (*get_op(char *str))(stack_t **stack, unsigned int line_number);
 void free_stack(stack_t *head);
