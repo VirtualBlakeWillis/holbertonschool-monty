@@ -78,6 +78,7 @@ int parse_line(char *buff, stack_t **head, unsigned int lnum)
 {
 	char *token;
 	void (*f)(stack_t **stack, unsigned int line_number);
+	unsigned int i = 0;
 
 	token = strtok(buff, " \t\n");
 	if (token == NULL)
@@ -97,6 +98,18 @@ int parse_line(char *buff, stack_t **head, unsigned int lnum)
 	if (strcmp(token, "push") == 0)
 	{
 		token = strtok(NULL, " \t\n");
+		while (token[i])
+		{
+			if (isdigit(token[i]) || token[i] == '-')
+				i++;
+			else
+			{
+				fprintf(stderr, "L%d: usage: push integer\n", lnum);
+				isFail = 1;
+				return (EXIT_FAILURE);
+
+			}
+		}
 		(*head)->n = atoi(token);
 		if ((*head)->n == 0 && strcmp(token, "0") != 0)
 		{
