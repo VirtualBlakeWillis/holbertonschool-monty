@@ -9,7 +9,7 @@
  * @n: data for node
  * Return: address of head, or NULL
  */
-void push(stack_t **h, unsigned int ln)
+void push(stack_t **h, __attribute((unused))unsigned int ln)
 {
 	stack_t *new;
 
@@ -34,7 +34,7 @@ void push(stack_t **h, unsigned int ln)
 	*h = new;
 }
 
-void pall(stack_t **h, unsigned int ln)
+void pall(stack_t **h, __attribute__((unused))unsigned int ln)
 {
 	stack_t *temp = *h;
 	while (temp)

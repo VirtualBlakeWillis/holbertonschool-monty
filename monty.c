@@ -11,7 +11,6 @@ extern unsigned int isFail;
 int main(int ac, char **av)
 {
 	FILE *file_fd;
-	int errorCheck;
 	isFail = 0;
 
 	if (ac != 2)
@@ -51,7 +50,7 @@ int read_file(FILE *fd)
 	ssize_t nread;
 	unsigned int lnum = 0;
 
-	while (nread = getline(&buff, &buffsize, fd) != -1)
+	while ((nread = getline(&buff, &buffsize, fd)) != -1)
 	{
 		lnum++;
 		/* fwrite(buff, nread, buffsize, stdout); */
