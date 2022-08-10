@@ -11,8 +11,8 @@ unsigned int isFail;
 int main(int ac, char **av)
 {
 	FILE *file_fd;
-	isFail = 0;
 
+	isFail = 0;
 	if (ac != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
@@ -72,7 +72,12 @@ int read_file(FILE *fd)
 }
 
 /**
+ * parse_line - parse a line from getline
  *
+ * @buff: output from getline
+ * @head: head of stack
+ * @lnum: line number
+ * Return: 0 on success, 1 on failure
  */
 int parse_line(char *buff, stack_t **head, unsigned int lnum)
 {
@@ -98,14 +103,7 @@ int parse_line(char *buff, stack_t **head, unsigned int lnum)
 	if (strcmp(token, "push") == 0)
 	{
 		token = strtok(NULL, " \t\n");
-		if (token == NULL)
-		{
-			fprintf(stderr, "L%d: usage: push integer\n", lnum);
-			isFail = 1;
-			return (EXIT_FAILURE);
-		}
-		while (token[i])
-		{
+		do {
 			if (isdigit(token[i]) || token[i] == '-')
 				i++;
 			else
@@ -113,16 +111,9 @@ int parse_line(char *buff, stack_t **head, unsigned int lnum)
 				fprintf(stderr, "L%d: usage: push integer\n", lnum);
 				isFail = 1;
 				return (EXIT_FAILURE);
-
 			}
-		}
+		} while (token[i]);
 		(*head)->n = atoi(token);
-		if ((*head)->n == 0 && strcmp(token, "0") != 0)
-		{
-			fprintf(stderr, "L%d: usage: push integer\n", lnum);
-			isFail = 1;
-			return (EXIT_FAILURE);
-		}
 	}
 	return (EXIT_SUCCESS);
 }
@@ -153,10 +144,13 @@ void (*get_op(char *str))(stack_t **stack, unsigned int line_number)
 /**
  * free_stack - frees a stack
  *
+ * @head: head of a stack
+ * Return: void
  */
 void free_stack(stack_t *head)
 {
 	stack_t *temp = head;
+
 	if (temp == NULL)
 		return;
 
