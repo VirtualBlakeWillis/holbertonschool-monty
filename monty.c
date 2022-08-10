@@ -15,14 +15,14 @@ int main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		fprintf(stderr, "USAGE: monty file\n");
+		/* fprintf(stderr, "USAGE: monty file\n"); */
 		return (EXIT_FAILURE);
 	}
 
 	file_fd = fopen(av[1], "r");
 	if (file_fd == NULL)
 	{
-		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
+		/* fprintf(stderr, "Error: Can't open file %s\n", av[1]); */
 		return (EXIT_FAILURE);
 	}
 
@@ -83,7 +83,7 @@ int parse_line(char *buff, stack_t **head, unsigned int lnum)
 
 	if (f == NULL)
 	{
-		fprintf(stderr, "unknown func: %s L%d\n", token, lnum);
+		/* fprintf(stderr, "unknown func: %s L%d\n", token, lnum); */
 		isFail = 1;
 		return (EXIT_FAILURE);
 	}
@@ -96,7 +96,7 @@ int parse_line(char *buff, stack_t **head, unsigned int lnum)
 			(*head)->n = 0;
 		if (token == NULL)
 		{
-			fprintf(stderr, "L%d: usage: push integer\n", lnum);
+			/* fprintf(stderr, "L%d: usage: push integer\n", lnum); */
 			isFail = 1;
 			return (EXIT_FAILURE);
 		}
@@ -105,7 +105,7 @@ int parse_line(char *buff, stack_t **head, unsigned int lnum)
 			(*head)->n = atoi(token);
 			if ((*head)->n == 0)
 			{
-				fprintf(stderr, "L%d: usage: push integer\n", lnum);
+				/* fprintf(stderr, "L%d: usage: push integer\n", lnum); */
 				isFail = 1;
 				return (EXIT_FAILURE);
 			}
