@@ -75,6 +75,7 @@ void pint(stack_t **h, unsigned int ln)
 void pop(stack_t **h, unsigned int ln)
 {
 	stack_t *temp = *h;
+
 	if (*h == NULL)
 	{
 		fprintf(stderr, "L%d: can't pop an empty stack\n", ln);
@@ -90,7 +91,7 @@ void pop(stack_t **h, unsigned int ln)
  *
  * @h: head of stack
  * @ln: line number
- * @Return: void
+ * Return: void
  */
 void swap(stack_t **h, unsigned int ln)
 {
