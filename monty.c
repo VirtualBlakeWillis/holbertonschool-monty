@@ -80,8 +80,12 @@ int parse_line(char *buff, stack_t **head, unsigned int lnum)
 	void (*f)(stack_t **stack, unsigned int line_number);
 
 	token = strtok(buff, " \t\n");
-	f = get_op(token);
+	if (token == NULL)
+	{
+		return (EXIT_SUCCESS);
+	}
 
+	f = get_op(token);
 	if (f == NULL)
 	{
 		fprintf(stderr, "unknown func: %s L%d\n", token, lnum);
