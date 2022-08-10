@@ -1,6 +1,6 @@
 #include "monty.h"
 
- unsigned int isFail;
+unsigned int isFail;
 /**
  * main - monty main function
  *
@@ -25,7 +25,7 @@ int main(int ac, char **av)
 		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
 		return (EXIT_FAILURE);
 	}
-	
+
 	if (read_file(file_fd) == EXIT_FAILURE)
 	{
 		/* failure */
@@ -37,7 +37,7 @@ int main(int ac, char **av)
 }
 
 /**
- * read_file - 
+ * read_file - read a file
  *
  * @fd: FILE pointer
  * Return: 0 on success, 1 on failure
@@ -66,7 +66,7 @@ int read_file(FILE *fd)
 
 	if (buff != NULL)
 		free(buff);
-	
+
 	return (EXIT_SUCCESS);
 }
 
@@ -77,16 +77,22 @@ int parse_line(char *buff, stack_t **head, unsigned int lnum)
 {
 	char *token;
 	void (*f)(stack_t **stack, unsigned int line_number);
-	
-	token = strtok(buff, " \t");
+
+	token = strtok(buff, " \t\n");
 	f = get_op(token);
-	
+
+	if (f == NULL)
+	{
+		fprintf(stderr, "unknown func: %s L%d\n", token, lnum);
+		isFail = 1;
+		return (EXIT_FAILURE);
+	}
 	f(head, lnum);
 
 	if (strcmp(token, "push") == 0)
 	{
 		token = strtok(NULL, " \t\n");
-		if (strcmp(token,"0") == 0)
+		if (strcmp(token, "0") == 0)
 			(*head)->n = 0;
 		if (token == NULL)
 		{
@@ -106,4 +112,27 @@ int parse_line(char *buff, stack_t **head, unsigned int lnum)
 		}
 	}
 	return (EXIT_SUCCESS);
+}
+
+/**
+ * get_op - get opcode function
+ *
+ * @str: opcode command
+ * Return: function pointer
+ */
+void (*get_op(char *str))(stack_t **stack, unsigned int line_number)
+{
+	instruction_t ops[] = {
+		{"push", push},
+		{"pall", pall},
+		{"pint", pint},
+		{NULL, NULL}
+	};
+	unsigned int i = 0;
+
+	while (ops[i].opcode && strcmp(str, ops[i].opcode) != 0)
+		i++;
+	if (ops[i].opcode == NULL)
+		return (NULL);
+	return (ops[i].f);
 }

@@ -41,7 +41,7 @@ typedef struct instruction_s
 #include <fcntl.h>
 #include <unistd.h>
 
-unsigned int isFail;
+extern unsigned int isFail;
 /* function prototypes */
 int read_file(FILE *fd);
 int parse_line(char *line, stack_t **h, unsigned int lnum);
