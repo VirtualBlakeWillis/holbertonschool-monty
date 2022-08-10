@@ -97,23 +97,12 @@ int parse_line(char *buff, stack_t **head, unsigned int lnum)
 	if (strcmp(token, "push") == 0)
 	{
 		token = strtok(NULL, " \t\n");
-		if (strcmp(token, "0") == 0)
-			(*head)->n = 0;
-		if (token == NULL)
+		(*head)->n = atoi(token);
+		if ((*head)->n == 0 && strcmp(token, "0") != 0)
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", lnum);
 			isFail = 1;
 			return (EXIT_FAILURE);
-		}
-		else
-		{
-			(*head)->n = atoi(token);
-			if ((*head)->n == 0)
-			{
-				fprintf(stderr, "L%d: usage: push integer\n", lnum);
-				isFail = 1;
-				return (EXIT_FAILURE);
-			}
 		}
 	}
 	return (EXIT_SUCCESS);
