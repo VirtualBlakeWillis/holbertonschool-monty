@@ -104,7 +104,7 @@ int parse_line(char *buff, stack_t **head, unsigned int lnum)
 	{
 		token = strtok(NULL, " \t\n");
 		do {
-			if (isdigit(token[i]) || token[i] == '-')
+			if (token && (isdigit(token[i]) || token[i] == '-'))
 				i++;
 			else
 			{
