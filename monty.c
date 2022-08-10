@@ -94,7 +94,7 @@ int parse_line(char *buff, stack_t **head, unsigned int lnum)
 	f = get_op(token);
 	if (f == NULL)
 	{
-		fprintf(stderr, "unknown func: %s L%d\n", token, lnum);
+		fprintf(stderr, "L%d: unknown instruction %s\n", lnum, token);
 		isFail = 1;
 		return (EXIT_FAILURE);
 	}
