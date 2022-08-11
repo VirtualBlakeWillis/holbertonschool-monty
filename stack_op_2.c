@@ -15,6 +15,8 @@ void add(stack_t **h, unsigned int ln)
 	if (!temp)
 	{
 		fprintf(stderr, "L%d: can't add, stack too short\n", ln);
+		isFail = 1;
+		return;
 	}
 	sum = (*h)->n + temp->n;
 	temp->n = sum;
