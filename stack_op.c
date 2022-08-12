@@ -95,15 +95,16 @@ void pop(stack_t **h, unsigned int ln)
  */
 void swap(stack_t **h, unsigned int ln)
 {
-	stack_t *temp = (*h)->next;
+	stack_t *temp;
 	int x;
 
-	if (*h == NULL || temp == NULL)
+	if (*h == NULL || (*h)->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't swap, stack too short\n", ln);
 		isFail = 1;
 		return;
 	}
+	temp = (*h)->next;
 	x = (*h)->n;
 	(*h)->n = temp->n;
 	temp->n = x;

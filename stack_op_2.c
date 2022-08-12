@@ -10,14 +10,16 @@
 void add(stack_t **h, unsigned int ln)
 {
 	unsigned int sum;
-	stack_t *temp = (*h)->next;
+	stack_t *temp;
 
-	if (!temp)
+	if (*h == NULL || (*h)->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't add, stack too short\n", ln);
 		isFail = 1;
 		return;
 	}
+
+	temp = (*h)->next;
 	sum = (*h)->n + temp->n;
 	temp->n = sum;
 	pop(h, ln);
